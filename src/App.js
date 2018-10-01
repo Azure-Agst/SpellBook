@@ -46,7 +46,7 @@ class Main extends React.Component {
               <Route exact path="/" component={Index} />
               <Route exact path="/loadout/:uuid" component={Loadout} />
               <Route exact path="/auth/login" component={Login} />
-              <Route exact path="/auth/signup" component={Signup} />
+              <Route exact path="/auth/pt-signup" component={Signup} />
               <Redirect exact from="/auth" to="/auth/login" />
               <Route component={Error404} />
             </Switch>

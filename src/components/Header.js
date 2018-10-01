@@ -83,9 +83,9 @@ export default class Header extends React.Component {
                 <NavItem>
                   <NavLink tag={Link} to="/auth/login">Login</NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink tag={Link} to="/auth/signup">Signup</NavLink>
-                </NavItem>
+                </NavItem> */}
               </Fragment>
             </Nav>
           </Collapse>
