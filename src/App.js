@@ -8,11 +8,11 @@ import store from "store";
 //Import CSS
 import './assets/css/bootstrap.min.css';
 
-import Header from './components/header.js';
-import Footer from './components/footer.js';
-import Index from './components/index.js';
-import Loadout from './components/loadout.js';
-import { Login, Signup } from './components/auth.js';
+import Header from './components/Header.js';
+import Footer from './components/Footer.js';
+import Index from './components/Index.js';
+import Loadout from './components/Loadout.js';
+import { Login, Signup } from './components/Auth.js';
 import Error404 from './components/Error404.js';
 
 var style = {
