@@ -8,12 +8,12 @@ import store from "store";
 //Import CSS
 import './assets/css/bootstrap.min.css';
 
-import Header from './components/Header.js';
-import Footer from './components/Footer.js';
-import Index from './components/Index.js';
-import Loadout from './components/Loadout.js';
-import { Login, Signup } from './components/Auth.js';
-import Error404 from './components/Error404.js';
+import Header from 'Components/Header.js';
+import Footer from 'Components/Footer.js';
+import Index from 'Components/Index.js';
+import Loadout from 'Components/Loadout.js';
+import { Login, Signup } from 'Components/Auth.js';
+import Error404 from 'Components/Error404.js';
 
 var style = {
   "main": {
