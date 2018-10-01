@@ -122,7 +122,14 @@ router.all('/signup', (req, res) => {
             console.log(err);
             res.send({"signup": false, "error": "Whoops! Serveride Error! Contact an admin for help!"});
           } else {
-            res.send({"signup": true, "username": result.username, "token": result.token, "image": result.image});
+            db.collection("users").findOne({username: username}, function(err, result){
+              if (err){
+                console.log(err);
+                res.send({"signup": false, "error": "Whoops! Serveride Error! Contact an admin for help!"});
+              } else {
+                res.send({"signup": true, "username": result.username, "token": result.token, "image": result.image});
+              }
+            });
           }
         });
       });

@@ -18,7 +18,8 @@ app.use('/public', express.static(path.join(__dirname, '/public'))); // set ./as
 
 // security may be a bit important.
 app.use(function(req, res, next) {
-  if(!req.secure) {
+  if(!req.secure && (process.env.NODE_ENV == 'production')) {
+    console.log("you're not safe!!!!!!!");
     var secureUrl = "https://" + req.headers['host'] + req.url;
     res.writeHead(301, { "Location":  secureUrl });
     res.end();
@@ -43,18 +44,18 @@ app.get("*", function(req, res){
 
 // Finish and Listen
 if (process.env.NODE_ENV == 'production'){
-  const privateKey = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/privkey.pem', 'utf8');
-  const certificate = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/cert.pem', 'utf8');
-  const ca = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/chain.pem', 'utf8');
+  var privateKey = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/privkey.pem', 'utf8');
+  var certificate = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/cert.pem', 'utf8');
+  var ca = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/chain.pem', 'utf8');
 
-  const credentials = {
+  var credentials = {
   	key: privateKey,
   	cert: certificate,
   	ca: ca
   };
 
-  const httpServer = http.createServer(app);
-  const httpsServer = https.createServer(credentials, app);
+  var httpServer = http.createServer(app);
+  var httpsServer = https.createServer(credentials, app);
 
   httpServer.listen(80, () => {
   	console.log('HTTP Server running on port 80');
@@ -65,7 +66,8 @@ if (process.env.NODE_ENV == 'production'){
   });
 
 } else {
-  app.listen(80, function(){
-    console.log("[Server] Server Started!");
-  })
+  var httpServer = http.createServer(app);
+  httpServer.listen(8000, () => {
+  	console.log("[Server] Server Started!");
+  });
 }
