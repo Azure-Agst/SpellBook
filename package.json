@@ -1,0 +1,44 @@
+{
+  "name": "spellbook",
+  "version": "1.0.0",
+  "description": "SpellBreak Encyclopedia",
+  "main": "index.js",
+  "scripts": {
+    "webpack-watch": "webpack -w",
+    "express-server": "nodemon ./index.js",
+    "dev": "concurrent --kill-others \"npm run webpack-watch\" \"npm run express-server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrew Augustine",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-react-css-modules": "^3.4.2",
+    "babel-preset-react": "^6.24.1",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
+    "css-loader": "^1.0.0",
+    "express": "^4.16.3",
+    "express-sanitizer": "^1.0.4",
+    "express-session": "^1.15.6",
+    "localStorage": "^1.0.3",
+    "mongodb": "^3.1.1",
+    "nodemon": "^1.18.3",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.5.0",
+    "reactstrap": "^6.3.1",
+    "store": "^2.0.12",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.4"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.0"
+  }
+}
