@@ -178,7 +178,6 @@ class LoadoutForm extends React.Component {
       belt: this.state.belt, boots: this.state.boots,
       desc: this.state.desc
     };
-    document.getElementByID("mainForm").reset();
     var self = this;
     axios.post('./api/createLoadout', data)
     .then(function(response){
