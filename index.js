@@ -43,9 +43,9 @@ app.get("*", function(req, res){
 
 // Finish and Listen
 if (process.env.NODE_ENV == 'production'){
-  const privateKey = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.com/privkey.pem', 'utf8');
-  const certificate = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.com/cert.pem', 'utf8');
-  const ca = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.com/chain.pem', 'utf8');
+  const privateKey = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/cert.pem', 'utf8');
+  const ca = fs.readFileSync('/etc/letsencrypt/live/spellbook.azureagst.pw/chain.pem', 'utf8');
 
   const credentials = {
   	key: privateKey,
@@ -65,7 +65,7 @@ if (process.env.NODE_ENV == 'production'){
   });
 
 } else {
-  app.listen(443, function(){
+  app.listen(80, function(){
     console.log("[Server] Server Started!");
   })
 }
