@@ -172,7 +172,7 @@ class LoadoutForm extends React.Component {
   submit(event) {
     event.preventDefault();
     var data = {
-      name: this.state.name, author: this.state.author,
+      name: this.state.name, author: store.get('user').name,
       rune: this.state.rune, left: this.state.left,
       right: this.state.right, amulet: this.state.amulet,
       belt: this.state.belt, boots: this.state.boots,
