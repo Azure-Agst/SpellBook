@@ -6,6 +6,7 @@ import { Container, Button, Jumbotron, Col, Row,
          Form, InputGroup, InputGroupAddon, FormGroup,
          Label, Input, FormText, ListGroup, Table,
          ListGroupItem } from "reactstrap";
+import { Redirect } from 'react-router-dom';
 
 var styles = {
   rightAlign: {
@@ -48,12 +49,18 @@ export default class Loadout extends React.Component {
   }
 
   render() {
-    //console.log(this.state.response);
-    return(
-      <Container>
-        { this.renderData() }
-      </Container>
-    )
+    //console.log(store.get('user'));
+    if (store.get('user') == undefined) {
+      return(
+        <Redirect to="/" />
+      )
+    } else {
+      return(
+        <Container>
+          { this.renderData() }
+        </Container>
+      )
+    }
   }
 
   renderData() {

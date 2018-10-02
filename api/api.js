@@ -41,7 +41,19 @@ router.get('/loadouts', (req, res) => {
   });
 });
 
-
+router.get('/loadouts/page-:page', (req, res) => {
+  var data = db.collection("loadouts").find();
+  var colCount; data.count((err, count) => {
+    colCount = count;
+  });
+  console.log(colCount)
+  var colData = data.sort({ timestamp: -1 })
+                   .skip(req.params.page > 0 ? ( ( req.params.page - 1 ) * 10 ) : 0)
+                   .limit(10);
+  colData.toArray((err, docs) => {
+    res.send({ count: colCount, docs: docs});
+  });
+});
 
 router.get('/loadout/:uuid', (req, res) => {
   var data = db.collection("loadouts").findOne({uuid: req.params.uuid}, (err, item) => {

@@ -43,7 +43,6 @@ export default class Header extends React.Component {
 
   render() {
     if (store.get('user') != undefined) {
-      console.log("USER IS DEFINED")
       return(
         <Navbar color="dark" fixed="top" dark expand="md">
           <NavbarBrand style={style.brand} tag={Link} to="/">SpellBook v1</NavbarBrand>
@@ -52,6 +51,9 @@ export default class Header extends React.Component {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink tag={Link} to="/">Home</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/loadouts/1">Loadouts</NavLink>
               </NavItem>
               {/* HERE */}
               <UncontrolledDropdown nav inNavbar>
@@ -69,7 +71,6 @@ export default class Header extends React.Component {
         </Navbar>
       )
     } else {
-      console.log("USER IS UNDEFINED")
       return(
         <Navbar color="dark" fixed="top" dark expand="md">
           <NavbarBrand style={style.brand} tag={Link} to="/">SpellBook v1</NavbarBrand>

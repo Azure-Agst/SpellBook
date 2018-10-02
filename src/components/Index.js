@@ -6,6 +6,8 @@ import { Container, Button, Jumbotron, Col, Row,
          Label, Input, FormText, ListGroup, ListGroupItem } from "reactstrap";
 import store from "store";
 
+import DefaultAlert from 'Components/Alerts.js';
+
 import items from '../assets/items.js';
 import exampleTable from '../assets/exampleTable.js';
 import fakeNames from '../assets/names.js';
@@ -13,6 +15,16 @@ import fakeNames from '../assets/names.js';
 //
 // DEFAULT
 //
+
+var styles = {
+  videoWrap: {
+    "padding": "30px",
+    "objectFit": "contain"
+  },
+  jumboWithAlert: {
+    "paddingBottom": "15px"
+  }
+}
 
 export default class index extends React.Component {
   constructor(props){
@@ -23,6 +35,8 @@ export default class index extends React.Component {
     this.renderTable = this.renderTable.bind(this);
     this.getLoadouts = this.getLoadouts.bind(this);
   }
+
+  //This is a comment
 
   componentDidMount() {
     this.getLoadouts();
@@ -84,7 +98,7 @@ export default class index extends React.Component {
       return (
         <Container>
           <Jumbotron>
-            <h1>Spellbook v1.0.0</h1>
+            <h1>SpellBook v1.0.0</h1>
             <hr />
             <h3>Submit a loadout!</h3>
             <br />
@@ -96,12 +110,30 @@ export default class index extends React.Component {
     } else {
       return (
         <Container>
-          <Jumbotron>
-            <h1>Spellbook v1.0.0</h1>
+          <Jumbotron style={styles.jumboWithAlert}>
+            <h1>SpellBook v1.0.0</h1>
+            <br />
+            <DefaultAlert />
           </Jumbotron>
-          <h2>Hey there!</h2>
-          <p>This resource is currently only available to playtesters. Sign up or log in to gain access!</p>
-          <br />
+          <Row>
+            <Col>
+              <h2>Hey there!</h2>
+              <p>This resource is currently only available to SpellBreak playtesters. Log in to gain access!</p>
+              <p>If you are a playtester and want in, ping Azure in #pt-discussion to get the signup link!</p>
+              <p>If you're not a playtester and want to learn more about the game, join our <a href="https://discordapp.com/invite/proletariat">Discord</a> or check out our <a href="https://imgur.com/user/proletariatgames">Imgur</a> for more info!</p>
+              <br />
+            </Col>
+            <Col sm="6">
+              <Jumbotron style={styles.videoWrap}>
+                <div>
+                  <video width="100%" autoPlay loop>
+                    <source src="https://i.imgur.com/4wcS0vF.mp4" type="video/mp4"/>
+                    If you're seeing this, it means your browser does not support the HTML5 video tag! Try a newer browser, like Chrome or Firefox!
+                  </video>
+                </div>
+              </Jumbotron>
+            </Col>
+          </Row>
         </Container>
       )
     }
@@ -150,7 +182,7 @@ class LoadoutForm extends React.Component {
   autoAuthor() {
     if (store.get('user') != undefined) {
       return(
-        <Input type="text" name="author" id="author" value={store.get('user').name} onChange={this.handleInputChange} />
+        <Input type="text" name="author" id="author" value={store.get('user').name} onChange={this.handleInputChange} readOnly />
       )
     } else { // NOTE: The only reason this "else" is here is to futureproof for public release.
       return(
@@ -193,92 +225,95 @@ class LoadoutForm extends React.Component {
   render() {
     return(
       <Form id="mainForm" onSubmit={this.submit}>
-        <Row>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Loadout Name:</InputGroupAddon>
-              <Input type="text" name="name" id="name" placeholder={this.randomName()} onChange={this.handleInputChange} />
-            </InputGroup>
-          </Col>
-          <Col xs="4">
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Author:</InputGroupAddon>
-              { this.autoAuthor() }
-            </InputGroup>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Rune:</InputGroupAddon>
-              <Input type="select" name="rune" id="runeSel" onChange={this.handleInputChange}>
-                { items.runes.map((option, key) => <option key={key}>{option}</option>)}
-              </Input>
-            </InputGroup>
-          </Col>
-        </Row>
-        <br/>
-        <Row>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Left:</InputGroupAddon>
-              <Input type="select" name="left" id="leftSel" onChange={this.handleInputChange}>
-                { items.gauntlets.map((option, key) => <option key={key}>{option}</option>)}
-              </Input>
-            </InputGroup>
-          </Col>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Right:</InputGroupAddon>
-              <Input type="select" name="right" id="rightSel" onChange={this.handleInputChange}>
-                { items.gauntlets.map((option, key) => <option key={key}>{option}</option>)}
-              </Input>
-            </InputGroup>
-          </Col>
-        </Row>
-        <br/>
-        <Row>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Amulet:</InputGroupAddon>
-              <Input type="select" name="amulet" id="leftSel" onChange={this.handleInputChange}>
-                { items.amulets.map((option, key) => <option key={key}>{option}</option>)}
-              </Input>
-            </InputGroup>
-          </Col>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Belt:</InputGroupAddon>
-              <Input type="select" name="belt" id="rightSel" onChange={this.handleInputChange}>
-                { items.belts.map((option, key) => <option key={key}>{option}</option>)}
-              </Input>
-            </InputGroup>
-          </Col>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Boots:</InputGroupAddon>
-              <Input type="select" name="boots" id="rightSel" onChange={this.handleInputChange}>
-                { items.boots.map((option, key) => <option key={key}>{option}</option>)}
-              </Input>
-            </InputGroup>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">Description:</InputGroupAddon>
-              <Input type="textarea" name="desc" id="desc" onChange={this.handleInputChange} />
-            </InputGroup>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col>
-            <Button>Submit</Button>
-          </Col>
-        </Row>
+        <Container fluid>
+          <Row>
+            { console.log(window.innerWidth) }
+            <Col xs="6">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Loadout Name:</InputGroupAddon>
+                <Input type="text" name="name" id="name" placeholder={this.randomName()} onChange={this.handleInputChange} />
+              </InputGroup>
+            </Col>
+            <Col xs="6">
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Author:</InputGroupAddon>
+                { this.autoAuthor() }
+              </InputGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Rune:</InputGroupAddon>
+                <Input type="select" name="rune" id="runeSel" onChange={this.handleInputChange}>
+                  { items.runes.map((option, key) => <option key={key}>{option}</option>)}
+                </Input>
+              </InputGroup>
+            </Col>
+          </Row>
+          <br/>
+          <Row>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Left:</InputGroupAddon>
+                <Input type="select" name="left" id="leftSel" onChange={this.handleInputChange}>
+                  { items.gauntlets.map((option, key) => <option key={key}>{option}</option>)}
+                </Input>
+              </InputGroup>
+            </Col>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Right:</InputGroupAddon>
+                <Input type="select" name="right" id="rightSel" onChange={this.handleInputChange}>
+                  { items.gauntlets.map((option, key) => <option key={key}>{option}</option>)}
+                </Input>
+              </InputGroup>
+            </Col>
+          </Row>
+          <br/>
+          <Row>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Amulet:</InputGroupAddon>
+                <Input type="select" name="amulet" id="leftSel" onChange={this.handleInputChange}>
+                  { items.amulets.map((option, key) => <option key={key}>{option}</option>)}
+                </Input>
+              </InputGroup>
+            </Col>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Belt:</InputGroupAddon>
+                <Input type="select" name="belt" id="rightSel" onChange={this.handleInputChange}>
+                  { items.belts.map((option, key) => <option key={key}>{option}</option>)}
+                </Input>
+              </InputGroup>
+            </Col>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Boots:</InputGroupAddon>
+                <Input type="select" name="boots" id="rightSel" onChange={this.handleInputChange}>
+                  { items.boots.map((option, key) => <option key={key}>{option}</option>)}
+                </Input>
+              </InputGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Description:</InputGroupAddon>
+                <Input type="textarea" name="desc" id="desc" onChange={this.handleInputChange} />
+              </InputGroup>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col>
+              <Button>Submit</Button>
+            </Col>
+          </Row>
+        </Container>
       </Form>
     )
   }
