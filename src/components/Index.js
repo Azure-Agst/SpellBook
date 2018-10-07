@@ -62,6 +62,8 @@ export default class index extends React.Component {
     } else {
       return(
         <div>
+          <h3>Other User-Created loadouts:</h3>
+          <br />
           <ListGroup>
             { this.state.loadData.map((loadout, index) =>
               <ListGroupItem key={index}>

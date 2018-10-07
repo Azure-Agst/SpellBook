@@ -40,11 +40,12 @@ export default class LoadoutList extends React.Component {
       page: 0,
       loadData: []
     }
+
     this.renderData = this.renderData.bind(this);
     this.getData = this.getData.bind(this);
-    this.renderCursor = this.renderCursor.bind(this);
-    this.nextPage = this.nextPage.bind(this);
-    this.prevPage = this.prevPage.bind(this);
+    // this.renderCursor = this.renderCursor.bind(this);
+    // this.nextPage = this.nextPage.bind(this);
+    // this.prevPage = this.prevPage.bind(this);
   }
 
   getData() {
@@ -58,49 +59,6 @@ export default class LoadoutList extends React.Component {
       }));
     })
     .catch((err)=> {});
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  nextPage(event) {
-    event.preventDefault();
-    var page = this.props.match.params.page;
-    this.getData();
-    return(<Redirect to={ "/loadouts/"+(+page+1) } />)
-  }
-
-  prevPage(event) {
-    event.preventDefault();
-    var page = this.props.match.params.page;
-    this.getData();
-    return(<Redirect to={ "/loadouts/"+(+page-1) } />)
-  }
-
-  renderCursor() {
-    var page = this.props.match.params.page;
-    console.log(page)
-    if (page == 1) {
-      return(
-        <div style={styles.centerAlign}>
-          <Button onClick={this.nextPage}>Next Page</Button>
-        </div>
-      )
-    } else if (page == this.state.maxPages) {
-      return(
-        <div style={styles.centerAlign}>
-          <Button onClick={this.prevPage}>Prev Page</Button>
-        </div>
-      )
-    } else {
-      return(
-        <div style={styles.centerAlign}>
-          <Button onClick={this.nextPage}>Next Page  </Button>
-          <Button onClick={this.prevPage}>  Prev Page</Button>
-        </div>
-      )
-    }
   }
 
   renderData() {
@@ -163,7 +121,7 @@ export default class LoadoutList extends React.Component {
           <hr />
           <div style={styles.buttons}>
             <ButtonGroup>
-            { this.renderCursor() }
+            {/* this.renderCursor() */}
             </ButtonGroup>
           </div>
         </Container>

@@ -53,8 +53,11 @@ export default class Header extends React.Component {
                 <NavLink tag={Link} to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to="/loadouts/1">Loadouts</NavLink>
+                <NavLink tag={Link} to="/dev">Progress</NavLink>
               </NavItem>
+              {/* <NavItem>
+                <NavLink tag={Link} to="/loadouts/1">Loadouts</NavLink>
+              </NavItem> */}
               {/* HERE */}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

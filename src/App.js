@@ -14,6 +14,7 @@ import Index from 'Components/Index.js';
 import LoadoutView from 'Components/Loadout.js';
 import LoadoutList from 'Components/List.js'
 import { Login, Signup } from 'Components/Auth.js';
+import Dev from 'Components/Dev.js';
 import Error404 from 'Components/Error404.js';
 
 var style = {
@@ -47,6 +48,7 @@ class Main extends React.Component {
               <Route exact path="/" component={Index} />
               <Route exact path="/loadout/:uuid" component={LoadoutView} />
               <Route exact path="/loadouts/:page" component={LoadoutList} />
+              <Route exact path="/dev" component={Dev} />
               <Route exact path="/auth/login" component={Login} />
               <Route exact path="/auth/pt-user-signup" component={Signup} />
               <Redirect exact from="/auth" to="/auth/login" />
