@@ -134,7 +134,7 @@ export default class Loadout extends React.Component {
                     </Row>
                     <hr />
                     <Row>
-                      <Col xs={{ size: 'auto', offset: 1 }}>
+                      <Col>
                         <p><b>Description:</b></p>
                         <p><i>{loadout.desc}</i></p>
                       </Col>
