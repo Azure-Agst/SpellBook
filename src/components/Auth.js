@@ -3,7 +3,8 @@ import { Link, BrowserRouter, Route, Redirect } from "react-router-dom";
 import axios from 'axios';
 import { Container, Button, Jumbotron, Col, Row,
          Form, InputGroup, InputGroupAddon, FormGroup,
-         Label, Input, FormText, ListGroup, ListGroupItem } from "reactstrap";
+         Label, Input, FormText, ListGroup, Alert,
+         ListGroupItem } from "reactstrap";
 import store from "store";
 
 
@@ -29,6 +30,7 @@ export class Login extends React.Component {
      redirect: false
    }
    this.login = this.login.bind(this);
+   this.alert = this.alert.bind(this);
    this.handleInputChange = this.handleInputChange.bind(this);
  }
 
@@ -37,14 +39,18 @@ export class Login extends React.Component {
    var self = this; var data = { username: this.state.user, password: this.state.pass }
    axios.post('/api/login', data)
    .then(function(response){
-     store.set('user', {name: response.data.username, token: response.data.token, image: response.data.image})
-   })
-   .finally(() => {
-     self.setState(prevState => ({
-       user: undefined,
-       pass: undefined,
-       redirect: true
-     }));
+     //console.log("login was "+JSON.stringify(response.data))
+     if (response.data.login == false) {
+       window.location.href = window.location.href.split('?')[0] + "?login=false"; //wow this line is super lame LMAO
+       return;
+     } else {
+       store.set('user', {name: response.data.username, token: response.data.token, image: response.data.image});
+       self.setState(prevState => ({
+         user: undefined,
+         pass: undefined,
+         redirect: true
+       }));
+     }
    })
  }
 
@@ -58,7 +64,18 @@ export class Login extends React.Component {
    });
  }
 
+ alert() {
+   if (this.props.location.search == "?login=false") {
+     return(
+       <Alert color="danger">
+         Sorry, we couldn't log you in. Verify you're using the right username and password and try again!
+       </Alert>
+     )
+   }
+ }
+
  render() {
+   console.log(this.props)
    if (this.state.redirect) {
      return(
        <Redirect to="/" />
@@ -67,10 +84,11 @@ export class Login extends React.Component {
      return(
        <form onSubmit={this.login} style={style.body}>
          <Container style={style.container}>
+           { this.alert() }
            <h1 className="h3 mb-3 font-weight-normal">Please Log In!</h1>
            <Input type="text" onChange={this.handleInputChange} name="user" placeholder="username" required autoFocus />
            <Input type="password" onChange={this.handleInputChange} name="pass" placeholder="password" required />
-           <Button type="submit" name="submit" color="primary">Signup</Button>
+           <Button type="submit" name="submit" color="primary">Login</Button>
          </Container>
        </form>
      )

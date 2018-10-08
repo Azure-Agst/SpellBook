@@ -219,6 +219,7 @@ class LoadoutForm extends React.Component {
       if (data.success == false) {
         console.log(data.error)
       } else {
+        window.location.href = data.url;
         self.props.loadData();
       }
     })

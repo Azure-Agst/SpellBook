@@ -112,7 +112,7 @@ export default class LoadoutList extends React.Component {
   render() {
     if (store.get('user') == undefined) {
       return(
-        <Redirect to="/" />
+        <Redirect to="/404" />
       )
     } else {
       return(

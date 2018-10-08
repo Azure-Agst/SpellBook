@@ -91,11 +91,16 @@ router.all('/login', (req, res) => {
       };
 
       db.collection("users").findOne({username: username}, function(err, result){
+        if (result == null) {
+          res.send({"login": false, "error": "Username and password do not match!"});
+          return;
+        };
+
         bcrypt.compare(password, result.password, function(err, isequal){
           if (isequal == true){
             res.send({"login": true, "username": result.username, "token": result.token, "image": result.image});
           } else {
-            res.send({"login": false, "error": "Username and password don't match!"});
+            res.send({"login": false, "error": "Username and password do not match!"});
           }
         });
       })
@@ -208,7 +213,7 @@ router.all('/createLoadout', (req, res) => {
             console.log(err);
             res.send({"success": false, "error": "Whoops! Serveride Error! Contact an admin for help!"});
           } else {
-            res.send({"success": true, "message": "Success! Redirect!", "url": "/loadouts/"+result.ops[0].uuid});
+            res.send({"success": true, "message": "Success! Redirect!", "url": "/loadout/"+result.ops[0].uuid});
           }
       });
 
