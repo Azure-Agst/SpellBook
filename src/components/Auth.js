@@ -148,6 +148,8 @@ export class Signup extends React.Component {
        <form onSubmit={this.signup} style={style.body}>
          <Container style={style.container}>
            <h1 className="h3 mb-3 font-weight-normal">Please Sign Up!</h1>
+           <p>By signing up for this service, you hereby agree that you are a playtester for Spellbreak and will not send any links from this site to anyone outside of the playtesting community. Violation of this can and will result in immediate removal from the pre-alpha program.</p>
+           <hr/>
            <Input type="text" onChange={this.handleInputChange} name="user" placeholder="username" required autoFocus />
            <Input type="password" onChange={this.handleInputChange} name="pass" placeholder="password" required />
            <Button type="submit" name="submit" color="primary">Signup</Button>

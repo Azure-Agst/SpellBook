@@ -21,6 +21,7 @@ export default class Error404 extends React.Component {
     return(
       <div style={styles.loadingDiv}>
         <h1>Error! That page does not exist! <Link to="/">Go back home?</Link></h1>
+        <p>Also be sure to check if you're logged in!</p>
       </div>
     )
   }
